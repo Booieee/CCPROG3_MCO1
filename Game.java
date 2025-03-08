@@ -23,8 +23,8 @@ public class Game {
      * Constructor for the Game class.
      */
     public Game(String ply1Name, String ply2Name) {
-        this.player1 = new Player(ply1Name);
-        this.player2 = new Player(ply2Name);
+        this.player1 = new Player(ply1Name, "Left");
+        this.player2 = new Player(ply2Name, "Right");
         this.board = new Board();
         this.isGameOver = false;
         preGame();
@@ -129,16 +129,34 @@ public class Game {
             }
 
             if (board.isValidMove(selectedAnimal, newX, newY)) {
+                Tile oldTile = board.getTile(selectedAnimal.getX(), selectedAnimal.getY());
+                Tile targetTile = board.getTile(newX, newY);
+                Animal targetAnimal = targetTile.getOccupyingAnimal();
+                
+                if (targetAnimal != null) {
+                    System.out.println(selectedAnimal.getSpecies() + " is trying to attack " + targetAnimal.getSpecies());
 
-                int oldX = selectedAnimal.getX();
-                int oldY = selectedAnimal.getY();
+                    if (selectedAnimal.canCapture(targetAnimal, targetTile)) {
+                        System.out.println(selectedAnimal.getSpecies() + " captured " + targetAnimal.getSpecies());
 
-                // Move the animal
-                selectedAnimal.move(newX, newY);
+                        //Remove opponent's animal and update the position
+                        board.updatePosition(selectedAnimal, selectedAnimal.getX(), selectedAnimal.getY(), newX, newY);
+                        oldTile.setOccupyingAnimal(null);
 
-                // Update the board
-                board.updatePosition(selectedAnimal, oldX, oldY, newX, newY);
+                    } else {
+                        System.out.println("Invalid attack. " + selectedAnimal.getSpecies() + " cannot capture " + targetAnimal.getSpecies());
+                        continue;
+                    }
+                } else {
+                    targetTile.setOccupyingAnimal(selectedAnimal);
+                    oldTile.setOccupyingAnimal(null);
 
+                }
+
+                 // Move the animal
+                 selectedAnimal.move(newX, newY);
+
+                
                 // Check win condition
                 if (currentPlayer.winCondition()) {
                     System.out.println(currentPlayer.getName() + " wins!");

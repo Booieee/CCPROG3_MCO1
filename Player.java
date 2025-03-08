@@ -6,20 +6,22 @@ import java.util.ArrayList;
  */
 public class Player {
     private String name;
+    private String side;
     private ArrayList<Animal> animals;
 
-    private static final int PLAYER1_DEN_X = 0;  // Example values
-    private static final int PLAYER1_DEN_Y = 3;
-    private static final int PLAYER2_DEN_X = 8;
-    private static final int PLAYER2_DEN_Y = 3;
+    private static final int PLAYER1_DEN_X = 3;  // Example values
+    private static final int PLAYER1_DEN_Y = 0;
+    private static final int PLAYER2_DEN_X = 3;
+    private static final int PLAYER2_DEN_Y = 8;
  
 
     /**
      * Constructor for the Player class.
      * @param name The name of the player.
      */
-    public Player(String name) {
+    public Player(String name, String side) {
         this.name = name;
+        this.side = side;
         this.animals = new ArrayList<>();
     }
 
@@ -33,11 +35,12 @@ public class Player {
 
     // This method will check if the player wins if any of the animals reach the den
     public boolean winCondition(){
+        int opponentDenX = side.equals("Left") ? PLAYER2_DEN_X : PLAYER1_DEN_X;
+        int opponentDenY = side.equals("Left") ? PLAYER2_DEN_Y : PLAYER1_DEN_Y;
+
+
         for (Animal animal : animals) {
-            if (this.name.equals("Player1") && animal.getX() == PLAYER2_DEN_X && animal.getY() == PLAYER2_DEN_Y) {
-                return true;
-            }
-            if (this.name.equals("Player2") && animal.getX() == PLAYER1_DEN_X && animal.getY() == PLAYER1_DEN_Y) {
+            if (animal.getX() == opponentDenX && animal.getY() == opponentDenY) {
                 return true;
             }
         }

@@ -90,13 +90,23 @@ public class Board {
         if (x < 0 || x >= 7 || y < 0 || y >= 9) {
             return false;
         }
-        if (grid[x][y].isTrap()) {
-            return false;
-        }
+        
         if (grid[x][y].isWater() && !animal.isSwimmer()) {
             return false;
         }
-        return !grid[x][y].isOccupied();
+
+        Animal target = grid[x][y].getOccupyingAnimal();
+        Tile targetTile = grid[x][y];
+
+
+        if (target != null) {
+            if(grid[x][y].isTrap()) {
+                return true;
+            }
+            return animal.canCapture(target, targetTile);
+        }
+
+        return true;
     }
 
     /**

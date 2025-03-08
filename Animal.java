@@ -43,7 +43,11 @@ public class Animal {
      * @param oppTarget The opponent's target.
      * @return True if the animal can capture the opponent's target, false otherwise.
      */
-    public boolean canCapture(Animal oppTarget){
+    public boolean canCapture(Animal oppTarget, Tile oppTile){
+        if(oppTile.isTrap()){
+            return true;
+        }
+    
         if (this.getSpecies().equals("Rat") && oppTarget.getSpecies().equals("Elephant")){
             return true;
         }
