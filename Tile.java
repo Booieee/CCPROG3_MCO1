@@ -64,7 +64,7 @@ public class Tile {
     }
 
     /**
-     * This method will gets the x-coordinate of the tile.
+     * This method will gets the y-coordinate of the tile.
      * @return The y-coordinate of the tile.
      */
     public int getY() {
@@ -72,7 +72,7 @@ public class Tile {
     }
 
     /**
-     * Gets the type of the tile (e.g., "Normal", "Lake", "Den", "Trap").
+     * This method will gets the type of the tile.
      * @return The type of the tile.
      */
     public String getType() {
@@ -80,40 +80,16 @@ public class Tile {
     }
 
     /**
-     * This method will return the type of the tile.
-     * @return The type of the tile.
-     */
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    /**
-     * This method will set the x-coordinate of the tile.
-     * @param x The x-coordinate of the tile.
-     */
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    /**
-     * This method will set the y-coordinate of the tile.
-     * @param y The y-coordinate of the tile.
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    /**
-     * This method will set the type of the tile.
-     * @param type The type of the tile.
+     * This method will return the animal that is occupying the tile.
+     * @return The animal that is occupying the tile.
      */
     public Animal getOccupyingAnimal() {
         return isOccupied;
     }
 
     /**
-     * This method will return the animal that is occupying the tile.
-     * @return The animal that is occupying the tile.
+     * This method will set the animal that is occupying the tile.
+     * @param isOccupied The animal that is occupying the tile.
      */
     public void setOccupyingAnimal(Animal isOccupied) {
         this.isOccupied = isOccupied;

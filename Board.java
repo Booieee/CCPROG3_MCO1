@@ -15,7 +15,7 @@ public class Board {
     }
 
     /**
-     * This method will return the grid of the board.
+     * This method will initialize the board with the initial positions of the animals.
      */
     void initializeBoard(){
         // i = row, j = column
@@ -77,10 +77,13 @@ public class Board {
             }
             System.out.println();
         }
+
+        System.out.println("Symbols: El = Elephant, Li = Lion, Ti = Tiger, Le = Leopard");
+        System.out.println("         Wo = Wolf, Do = Dog, Ca = Cat, Ra = Rat");
     }
 
     /**
-     * This method will return if the move is valid.
+     * This method will check if the move is valid.
      * @param animal The animal that is moving.
      * @param x The x-coordinate of the move.
      * @param y The y-coordinate of the move.
@@ -110,26 +113,24 @@ public class Board {
     }
 
     /**
-     * This method will move the animal to the new tile.
+     * This method will update the position of the animal on the board.
      * @param animal The animal that is moving.
-     * @param x The x-coordinate of the move.
-     * @param y The y-coordinate of the move.
+     * @param oldX The old x-coordinate of the animal.
+     * @param oldY The old y-coordinate of the animal.
+     * @param newX The new x-coordinate of the animal.
+     * @param newY The new y-coordinate of the animal.
      */
-    public void moveAnimal(Animal animal, int x, int y) {
-        grid[animal.getX()][animal.getY()].setOccupyingAnimal(null);
-        grid[x][y].setOccupyingAnimal(animal);
-        animal.setX(x);
-        animal.setY(y);
-    }
-
     public void updatePosition(Animal animal, int oldX, int oldY, int newX, int newY) {
         grid[oldX][oldY].setOccupyingAnimal(null);
         grid[newX][newY].setOccupyingAnimal(animal);
-        // animal.setX(newX);
-        // animal.setY(newY);
     }
 
-
+    /**
+     * This method will get the tile at the specified coordinates.
+     * @param x The x-coordinate of the tile.
+     * @param y The y-coordinate of the tile.
+     * @return The tile at the specified coordinates.
+     */
     public Tile getTile(int x, int y) {
         return grid[x][y];
     }

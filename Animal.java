@@ -16,7 +16,8 @@ public class Animal {
     private int rank;
     private int x, y;
     private String symbol;
-    private static final ArrayList<String> SWIMMERS = new ArrayList<>(Set.of("Rat", "Lion", "Tiger"));
+    private static final ArrayList<String> swimmers = new ArrayList<>(Set.of("Rat", "Lion", "Tiger"));
+    
     /**
      * Constructor for the Animal class.
      * @param species The species of the animal.
@@ -33,15 +34,21 @@ public class Animal {
         this.symbol = symbol;
     }
 
+    /**
+     * Another constructor for the Animal class for the pre-game.
+     * @param species The species of the animal.
+     * @param rank The rank of the animal.
+     */
     public Animal(String species, int rank) {
         this.species = species;
         this.rank = rank;
     }
 
     /**
-     * This method will check if the animal can capture the opponent's target.
-     * @param oppTarget The opponent's target.
-     * @return True if the animal can capture the opponent's target, false otherwise.
+     * This method will check if the animal can capture the opponent's animal.
+     * @param oppTarget The opponent's animal.
+     * @param oppTile The opponent's tile.
+     * @return True if the animal can capture the opponent's animal, false otherwise.
      */
     public boolean canCapture(Animal oppTarget, Tile oppTile){
         if(oppTile.isTrap()){
@@ -65,32 +72,18 @@ public class Animal {
         this.y = y;
     }
 
-    public void move(String direction) {
-        switch (direction.toLowerCase()) {
-            case "up":
-                move(x, y - 1);
-                break;
-            case "down":
-                move(x, y + 1);
-                break;
-            case "left":
-                move(x - 1, y);
-                break;
-            case "right":
-                move(x + 1, y);
-                break;
-        }
-    }
-
     /**
      * This method will check if the animal is a swimmer.
      * @return True if the animal is a swimmer, false otherwise.
      */
     public boolean isSwimmer(){
-        return SWIMMERS.contains(this.species);
+        return swimmers.contains(this.species);
     }
 
-    
+    /**
+     * This method will return the species of the animal.
+     * @return The species of the animal.
+     */
     public String getSpecies(){
         return this.species;
     }
@@ -112,14 +105,6 @@ public class Animal {
     }
 
     /**
-     * This method will set the x-coordinate of the animal.
-     * @param x The x-coordinate of the animal.
-     */
-    public void setX(int x){
-        this.x = x;
-    }
-
-    /**
      * This method will return the y-coordinate of the animal.
      * @return The y-coordinate of the animal.
      */
@@ -128,23 +113,11 @@ public class Animal {
     }
 
     /**
-     * This method will set the y-coordinate of the animal.
-     * @param y The y-coordinate of the animal.
+     * This method will return the symbol of the animal.
+     * @return The symbol of the animal.
      */
-    public void setY(int y){
-        this.y = y;
-    }
-
     public String getSymbol() {
         return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public String toString(){
-        return this.species + " " + this.rank;
     }
 
 }
