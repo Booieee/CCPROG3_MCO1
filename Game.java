@@ -151,7 +151,6 @@ public class Game {
         setupAnimals();
 
         while (!isGameOver) {
-
             System.out.println("Current player: " + currentPlayer.getName());
             board.printBoard();
 
@@ -193,7 +192,7 @@ public class Game {
                 case 'S': 
                     if ((selectedAnimal.getSpecies().equals("Lion") || 
                          selectedAnimal.getSpecies().equals("Tiger")) && board.getTile(newX + 1, newY).isWater()) {
-                        newX += 3; // Jump over    
+                        newX += 3; // Jump over the lake (3 tiles down)    
                         System.out.println(selectedAnimal.getSpecies() + " jumps over the lake!");
                     } else {
                         newX++;
@@ -217,7 +216,8 @@ public class Game {
                 Tile oldTile = board.getTile(selectedAnimal.getX(), selectedAnimal.getY());
                 Tile targetTile = board.getTile(newX, newY);
                 Animal targetAnimal = targetTile.getOccupyingAnimal();
-                
+
+                // Check if the animal is attacking
                 if (targetAnimal != null) {
                     if(currentPlayer.getAnimals().contains(targetAnimal)){
                         System.out.println("Invalid move. You cannot attack your own animal.");
@@ -229,7 +229,14 @@ public class Game {
                     if (selectedAnimal.canCapture(targetAnimal, targetTile)) {
                         System.out.println(selectedAnimal.getSpecies() + " captured " + targetAnimal.getSpecies());
 
-                        //Remove opponent's animal and update the position
+                        //Remove the target animal from the player's list of animals
+                        if (currentPlayer == player1) {
+                            player2.getAnimals().remove(targetAnimal);
+                        } else {
+                            player1.getAnimals().remove(targetAnimal);
+                        }
+
+                        //update the position
                         board.updatePosition(selectedAnimal, selectedAnimal.getX(), selectedAnimal.getY(), newX, newY);
                         oldTile.setOccupyingAnimal(null);
 

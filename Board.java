@@ -61,6 +61,8 @@ public class Board {
      * This method will print the board.
      */
     public void printBoard() {
+
+        System.out.println("===============================================");
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 9; j++) {
                 if (grid[i][j].isOccupied()) {
@@ -77,7 +79,7 @@ public class Board {
             }
             System.out.println();
         }
-
+        System.out.println("===============================================");
         System.out.println("Symbols: El = Elephant, Li = Lion, Ti = Tiger, Le = Leopard");
         System.out.println("         Wo = Wolf, Do = Dog, Ca = Cat, Ra = Rat");
     }
